@@ -15,11 +15,11 @@ export default function Navbar() {
     <nav className="bg-white/80 backdrop-blur-md border-b sticky top-0 z-50 text-slate-900 p-4">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         <Link href="/" className="text-xl font-black tracking-tighter">
-          MINI<span className="text-blue-600">STORE</span>
+          MINI<span className="text-blue-600 pl-1">ECOMMERCE</span>
         </Link>
         
         <div className="flex gap-8 items-center font-medium">
-          <Link href="/products" className="hover:text-blue-600 transition">Products</Link>
+          <Link href="/products" className="hover:text-black transition bg-blue-600 p-1 rounded-full px-3 text-white">Products</Link>
           
           <Link href="/cart" className="relative group">
             <span className="hover:text-blue-600 transition">Cart</span>
