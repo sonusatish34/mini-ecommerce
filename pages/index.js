@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import ProductCard from '../components/ProductCard'
 import Link from 'next/link'
-
+import { useRouter } from 'next/router'
 // Premium Unsplash Images for the Hero Carousel
 const HERO_SLIDES = [
   {
@@ -27,6 +27,7 @@ const HERO_SLIDES = [
 export default function Home() {
   const [products, setProducts] = useState([])
   const [currentSlide, setCurrentSlide] = useState(0)
+  const router = useRouter()
 
   useEffect(() => {
     fetch('https://dummyjson.com/products?limit=8')
@@ -106,27 +107,27 @@ export default function Home() {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
-              { name: 'Electronics', img: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=400&h=400&auto=format&fit=crop' },
-              { name: 'Jewelery', img: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=400&h=400&auto=format&fit=crop' },
-              { name: 'Men', img: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=400&h=400&auto=format&fit=crop' },
-              { name: 'Women', img: 'https://images.unsplash.com/photo-1581044777550-4cfa60707c03?q=80&w=400&h=400&auto=format&fit=crop' }
+              { name: 'groceries', img: 'https://images.unsplash.com/photo-1652262968340-b735524f9ae4?q=80&w=1060&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
+              { name: 'furniture', img: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
+              { name: "fragrances", img: 'https://images.unsplash.com/photo-1672848700906-2b8ca62639e4?q=80&w=1203&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
+              { name: "smartphones", img: 'https://images.unsplash.com/photo-1721686602598-005825cce7c8?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' }
             ].map((cat) => (
               <div
                 key={cat.name}
-                className="group relative h-48 md:h-56 flex items-center justify-center rounded-3xl overflow-hidden cursor-pointer shadow-md transition-all hover:-translate-y-1 hover:shadow-xl"
+                onClick={() =>
+                  router.push(`/category/${encodeURIComponent(cat.name)}`)
+                }
+                className="group relative h-48 md:h-56 flex items-center justify-center rounded-3xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl"
               >
-                {/* 1. The Background Image */}
                 <img
                   src={cat.img}
                   alt={cat.name}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition"
                 />
 
-                {/* 2. The Simple Dark Overlay (makes text readable) */}
-                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors duration-300" />
+                <div className="absolute inset-0 bg-black/40" />
 
-                {/* 3. The Category Name (Centered and on top) */}
-                <p className="relative z-10 text-white font-black text-xl md:text-2xl tracking-tight uppercase">
+                <p className="relative text-white font-bold text-xl uppercase">
                   {cat.name}
                 </p>
               </div>
